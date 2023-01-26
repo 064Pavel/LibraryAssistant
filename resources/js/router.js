@@ -13,6 +13,11 @@ const router = createRouter({
             name: 'auth',
             component: () => import('../vue-components/content/auth/ModalWindow.vue')
         },
+        {
+            path: '/library',
+            name: 'library',
+            component: () => import('../vue-components/content/library/IndexComponent.vue')
+        },
     ]
 })
 
