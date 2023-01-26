@@ -1,6 +1,6 @@
 <template>
-    <div>
-        Content
+    <div class="container-sm">
+        <router-view></router-view>
     </div>
 </template>
 

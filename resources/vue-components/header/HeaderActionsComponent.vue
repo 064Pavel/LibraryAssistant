@@ -1,7 +1,6 @@
 <template>
     <div v-if="!token" class="d-flex">
-        <div><button class="btn btn-primary ms-4">Sign In</button></div>
-        <div><button class="btn btn-success ms-4">Sign Up</button></div>
+        <div><router-link :to="{name: 'auth'}"><button class="btn btn-success ms-4">Sign In</button></router-link></div>
     </div>
     <div v-if="token">
         <div><button class="btn btn-danger ms-4">Sign Out</button></div>
@@ -21,5 +20,8 @@ export default {
 </script>
 
 <style scoped>
-
+     button router-link{
+         text-decoration: none;
+         color: white;
+     }
 </style>
