@@ -16,7 +16,8 @@ import HeaderActionsComponent from "./HeaderActionsComponent.vue";
 export default {
     name: "HeaderComponent",
 
-    components: {HeaderActionsComponent}
+    components: {HeaderActionsComponent},
+
 }
 </script>
 

@@ -12,10 +12,11 @@ import ContentComponent from "./content/ContentComponent.vue";
 export default {
     name: "App",
 
-    components:{
+    components: {
         HeaderComponent,
         ContentComponent
-    }
+    },
+
 }
 </script>
 

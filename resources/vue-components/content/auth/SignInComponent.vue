@@ -15,28 +15,55 @@
         <div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input v-model="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <input v-model="password" type="password" class="form-control" id="exampleInputPassword1">
             </div>
             <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <input v-model="checkMeOut" type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
-            <button type="submit" class="btn btn-primary">Sign In</button>
+            <button @click="login" type="submit" class="btn btn-primary">Sign In</button>
         </div>
     </section>
 </template>
 
 <script>
+import router from "../../../js/router";
+
 export default {
     name: "SignInComponent",
 
+    data() {
+        return {
+            email: '',
+            password: '',
+            checkMeOut: null,
+        }
+    },
 
-    methods:{
 
+    methods: {
+        login() {
+            if (this.checkMeOut !== null) {
+                axios.get('/sanctum/csrf-cookie')
+                    .then(response => {
+                        console.log(this.email, this.password);
+                        axios.post('/login', {email: this.email, password: this.password})
+                            .then(response => {
+                                localStorage.setItem('x_xsrf_token', response.config.headers['X-XSRF-TOKEN'])
+                                router.push({name: 'library'})
+
+                            })
+                            .catch(response => {
+                                console.log(response.response);
+                            })
+
+                    })
+            }
+        }
     }
 }
 </script>

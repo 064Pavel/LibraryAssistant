@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="app" class="container">
-        <button class="btn btn-success">From Index</button>
+
     </div>
 </body>
 </html>

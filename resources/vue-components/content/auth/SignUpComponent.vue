@@ -15,19 +15,22 @@
         <div>
             <div class="mb-3">
                 <label for="exampleInputLogin1" class="form-label">Login </label>
-                <input type="text" class="form-control" id="exampleInputLogin1" aria-describedby="emailHelp">
+                <input v-model="name" type="text" class="form-control" id="exampleInputLogin1"
+                       aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input v-model="email" type="email" class="form-control" id="exampleInputEmail1"
+                       aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <input v-model="password" type="password" class="form-control" id="exampleInputPassword1">
             </div>
             <div class="mb-3">
                 <label for="exampleInputConfirmPassword1" class="form-label">Confirm password</label>
-                <input type="password" class="form-control" id="exampleInputConfirmPassword1">
+                <input v-model="password_confirmation" type="password" class="form-control"
+                       id="exampleInputConfirmPassword1">
             </div>
             <div class="mb-3">
                 <label for="exampleSelectLibrary" class="form-label">Choose your library</label>
@@ -40,15 +43,54 @@
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
-            <button type="submit" class="btn btn-success">Sign Up</button>
+            <button @click="register" type="submit" class="btn btn-success">Sign Up</button>
         </div>
     </section>
 </template>
 
 <script>
+import router from "../../../js/router";
+
 export default {
-    name: "SignupComponent"
+    name: "SignupComponent",
+
+    data() {
+        return {
+            name: '',
+            email: '',
+            password: '',
+            password_confirmation: '',
+            role_id: 1,
+
+            checkMeOut: ''
+        }
+    },
+
+    methods: {
+        register() {
+            if (this.checkMeOut != null) {
+                axios.get('/sanctum/csrf-cookie')
+                    .then(response => {
+
+                        console.log(this.name, this.email, this.password, this.password_confirmation);
+                        axios.post('/register', {
+                            name: this.name,
+                            email: this.email,
+                            password: this.password,
+                            password_confirmation: this.password_confirmation,
+                            role_id: this.role_id
+                        })
+                            .then(response => {
+                                console.log('good');
+                                localStorage.setItem('x_xsrf_token', response.config.headers['X-XSRF-TOKEN'])
+                                router.push({name: 'library'})
+                            })
+                    })
+            }
+        }
+    }
 }
+
 </script>
 
 <style scoped>
@@ -83,7 +125,7 @@ export default {
     background: transparent;
 }
 
-.img{
+.img {
     margin: 20px;
     width: 400px;
     height: 300px;
