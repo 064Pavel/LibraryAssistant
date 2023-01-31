@@ -1,12 +1,14 @@
 <template>
     <div class="d-flex flex-sm-wrap justify-content-center">
 
-        <div class="card m-4" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
+        <div v-for="book in books" class="card m-4" style="width: 18rem;">
+            <img src="https://russiangoods.ee/upload/iblock/f12/f12985e72dd74042ea036768815796c9.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h5 class="card-title">Title: {{book.title}}</h5>
+                <h5 class="card-title">Author: {{book.author.name}}</h5>
+                <h5 class="card-title mb-3">Year: {{book.year}}</h5>
+                <p class="card-text">{{book.description.slice(0, 120) }}...</p>
+                <a href="#" class="btn btn-primary">More</a>
             </div>
         </div>
 
@@ -15,7 +17,38 @@
 
 <script>
 export default {
-    name: "BooksComponent"
+    name: "BooksComponent",
+
+    data(){
+        return{
+            books: []
+        }
+    },
+
+    mounted() {
+        this.getBooks()
+    },
+
+    methods:{
+        getBooks(){
+            axios.get('/api/books')
+                .then(response => {
+                    this.books = response.data.data
+                    console.log(response.data.data);
+                })
+        }
+    },
+
+    filters: {
+        truncate: function (text, length, suffix) {
+            if (text.length > length) {
+                return text.substring(0, length) + suffix;
+            } else {
+                return text;
+            }
+        },
+    }
+
 }
 </script>
 

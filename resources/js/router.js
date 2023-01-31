@@ -29,11 +29,6 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('x_xsrf_token')
 
-    if (to.name === '/'){
-        return next({
-            name: 'homepage'
-        })
-    }
 
     if (!token) {
         if (to.name === 'auth' || to.name === 'homepage') {
@@ -46,7 +41,7 @@ router.beforeEach((to, from, next) => {
     }
 
 
-    if (to.name === 'auth' && token) {
+    if (to.name === 'auth' || to.name === 'homepage' && token) {
         return next({
             name: 'library'
         })
