@@ -19,7 +19,7 @@ const router = createRouter({
         {
             path: '/library',
             name: 'library',
-            component: () => import('../vue-components/content/library/IndexComponent.vue')
+            component: () => import('../vue-components/content/library/BooksComponent.vue')
         },
 
     ]
