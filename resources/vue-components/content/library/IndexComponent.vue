@@ -8,7 +8,9 @@
                 <h5 class="card-title">Author: {{book.author.name}}</h5>
                 <h5 class="card-title mb-3">Year: {{book.year}}</h5>
                 <p class="card-text">{{book.description.slice(0, 120) }}...</p>
-                <a href="#" class="btn btn-primary">More</a>
+                <router-link :to="{ name: 'books.show', params: { id: book.id }}">
+                    <span href="#" class="btn btn-primary">More</span>
+                </router-link>
             </div>
         </div>
 

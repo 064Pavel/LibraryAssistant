@@ -1,6 +1,6 @@
 <template>
     <FilterComponent></FilterComponent>
-    <IndexComponent></IndexComponent>
+    <router-view></router-view>
 </template>
 
 <script>
