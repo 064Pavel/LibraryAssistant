@@ -1,5 +1,6 @@
  <?php
 
+ use App\Http\Controllers\Book\Filter\BooksByAuthorController;
  use App\Http\Controllers\Book\IndexController;
  use App\Http\Controllers\Book\ShowController;
  use Illuminate\Http\Request;
@@ -23,4 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::get('/books', [IndexController::class, 'index']);
     Route::get('/books/{book}',[ShowController::class, 'show']);
+    Route::get('/books/by/{author}', [BooksByAuthorController::class, 'get_books']);
+    Route::get('/get_authors', [BooksByAuthorController::class, 'get_authors']);
 });

@@ -20,12 +20,15 @@
         </div>
 
     </div>
+
+
 </template>
 
 <script>
-
 export default {
-    name: "BooksComponent",
+    name: "BookByAuthorComponent",
+
+    props: ['author'],
 
     data(){
         return{
@@ -34,29 +37,21 @@ export default {
     },
 
     mounted() {
-        this.getBooks()
-    },
-
-    methods:{
-        getBooks(){
-            axios.get('/api/books')
-                .then(response => {
-                    this.books = response.data.data
-                    console.log(response.data.data);
-                })
+        if (this.author){
+            this.getBooksByAuthor(this.author)
         }
     },
 
-    filters: {
-        truncate: function (text, length, suffix) {
-            if (text.length > length) {
-                return text.substring(0, length) + suffix;
-            } else {
-                return text;
-            }
-        },
-    }
+    methods: {
+        getBooksByAuthor(author) {
+            console.log('props: '+this.author);
 
+            axios.get(`/api/books/by/${author}`)
+                .then(response => {
+                    this.books = response.data.data
+                })
+        }
+    }
 }
 </script>
 

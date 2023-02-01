@@ -54,7 +54,7 @@ export default {
                         axios.post('/login', {email: this.email, password: this.password})
                             .then(response => {
                                 localStorage.setItem('x_xsrf_token', response.config.headers['X-XSRF-TOKEN'])
-                                router.push({name: 'library'})
+                                router.push({name: 'books.index'})
 
                             })
                             .catch(response => {
