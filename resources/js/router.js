@@ -33,6 +33,13 @@ const router = createRouter({
                     props: true,
                     component: () =>import('../vue-components/content/library/ShowComponent.vue')
                 },
+
+                {
+                    path: 'books/user/:id',
+                    name: 'books.user',
+                    props: true,
+                    component: () =>import('../vue-components/content/library/components_for_filters/UserBooks.vue')
+                },
             ]
         },
 
