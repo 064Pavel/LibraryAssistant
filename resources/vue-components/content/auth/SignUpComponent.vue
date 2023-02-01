@@ -72,7 +72,7 @@ export default {
                 axios.get('/sanctum/csrf-cookie')
                     .then(response => {
 
-                        console.log(this.name, this.email, this.password, this.password_confirmation);
+                        console.log(this.name, this.email, this.password, this.password_confirmation, this.role_id);
                         axios.post('/register', {
                             name: this.name,
                             email: this.email,
@@ -83,7 +83,7 @@ export default {
                             .then(response => {
                                 console.log('good');
                                 localStorage.setItem('x_xsrf_token', response.config.headers['X-XSRF-TOKEN'])
-                                router.push({name: 'library'})
+                                router.push({name: 'books.index'})
                             })
                     })
             }
