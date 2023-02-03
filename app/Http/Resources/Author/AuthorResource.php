@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Filter;
+namespace App\Http\Resources\Author;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GetAuthorResource extends JsonResource
+class AuthorResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

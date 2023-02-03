@@ -13,8 +13,9 @@
 
 
             <div class="d-flex w-25" role="search">
-                <input class="form-control me-2" type="search" placeholder="Title" aria-label="Search">
-                <button class="btn btn-light" type="submit">Search</button>
+                <input v-model="title" class="form-control me-2" type="search" placeholder="Title" aria-label="Search">
+                <router-link :to="{name: 'books.by.title', params:{title: title}}" class="btn btn-light">Search</router-link>
+
             </div>
         </div>
     </nav>
@@ -28,7 +29,9 @@ export default {
     data() {
         return {
             author_id: '',
-            authors: []
+            authors: [],
+
+            title: ''
         }
     },
 

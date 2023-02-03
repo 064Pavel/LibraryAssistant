@@ -28,10 +28,16 @@ const router = createRouter({
                     component: () =>import('../vue-components/content/library/IndexComponent.vue'),
                 },
                 {
-                    path: 'books/by/:author?',
+                    path: 'books/by/author/:author?',
                     name: 'books.by.author',
                     props: true,
                     component: () =>import('../vue-components/content/library/components_for_filters/BookByAuthorComponent.vue'),
+                },
+                {
+                    path: 'books/by/title/:title?',
+                    name: 'books.by.title',
+                    props: true,
+                    component: () =>import('../vue-components/content/library/components_for_filters/BooksByTitleComponent.vue'),
                 },
                 {
                     path: 'books/:id',

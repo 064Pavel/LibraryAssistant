@@ -1,5 +1,6 @@
 <template>
 
+
     <div class="d-flex flex-sm-wrap justify-content-center">
 
         <div v-for="book in books" class="card m-4" style="width: 18rem;">
@@ -46,7 +47,7 @@ export default {
         getBooksByAuthor(author) {
             console.log('props: '+this.author);
 
-            axios.get(`/api/books/by/${author}`)
+            axios.get(`/api/books/by/author/${author}`)
                 .then(response => {
                     this.books = response.data.data
                 })
