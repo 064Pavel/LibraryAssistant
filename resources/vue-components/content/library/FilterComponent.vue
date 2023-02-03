@@ -5,12 +5,10 @@
             <div class="d-flex w-25" role="search">
                 <select v-model="author_id" class="form-select me-2" type="search" aria-label="Search" id="input-author">
                     <option value="" disabled>Author</option>
-                    <option :value="author.author_id" v-for="author in authors">{{author.author.name}}</option>
+                    <option :value="author.id" v-for="author in authors">{{author.name}}</option>
                 </select>
 
                 <router-link :to="{name: 'books.by.author', params:{author: author_id}}" class="btn btn-light">Search</router-link>
-
-
             </div>
 
 
@@ -43,11 +41,6 @@ export default {
             axios.get('/api/get_authors')
                 .then(response => {
                     this.authors = response.data.data
-                    console.log(this.author_id);
-
-                    // response.data.data.forEach(el => console.log(el.author.name))
-                    // console.log('res:'+ response.data.data.id);
-                    // console.log('res:'+response.data.data.author);
                 })
         },
 

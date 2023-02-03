@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Book\Filter;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Book\BookResource;
 use App\Http\Resources\Filter\GetAuthorResource;
+use App\Models\Author;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -13,7 +14,7 @@ class BooksByAuthorController extends Controller
 {
     public function get_authors() : ResourceCollection
     {
-        $author = Book::with('author')->get();
+        $author = Author::all();
         return GetAuthorResource::collection($author);
     }
 
