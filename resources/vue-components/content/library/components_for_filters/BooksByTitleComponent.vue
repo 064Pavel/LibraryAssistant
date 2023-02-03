@@ -2,7 +2,7 @@
 
     <div class="d-flex flex-sm-wrap justify-content-center">
 
-        <div v-if="books.length > 0">
+        <div v-if="books.length > 0" class="d-flex flex-sm-wrap">
             <div v-for="book in books" class="card m-4" style="width: 18rem;">
                 <img src="https://russiangoods.ee/upload/iblock/f12/f12985e72dd74042ea036768815796c9.jpg"
                      class="card-img-top" alt="...">
