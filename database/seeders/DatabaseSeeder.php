@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\BookUser;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,8 +17,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Author::factory(20)->create();
-        Book::factory(100)->create();
+//        Author::factory(20)->create();
+//        Book::factory(100)->create();
+
+        BookUser::factory(20)->create();
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

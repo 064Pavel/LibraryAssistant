@@ -1,7 +1,9 @@
  <?php
 
+ use App\Http\Controllers\AppController;
  use App\Http\Controllers\Book\Filter\BooksByAuthorController;
  use App\Http\Controllers\Book\Filter\BooksByTitleController;
+ use App\Http\Controllers\Book\Filter\UserBooksController;
  use App\Http\Controllers\Book\IndexController;
  use App\Http\Controllers\Book\ShowController;
  use Illuminate\Http\Request;
@@ -23,9 +25,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function (){
+
     Route::get('/books', [IndexController::class, 'index']);
     Route::get('/books/{book}',[ShowController::class, 'show']);
+
     Route::get('/books/by/author/{author}', [BooksByAuthorController::class, 'get_books']);
     Route::get('/get_authors', [BooksByAuthorController::class, 'get_authors']);
+
     Route::get('/books/by/title/{title}', [BooksByTitleController::class, 'get_books']);
+    Route::get('/user', [AppController::class, 'getUser']);
+    Route::get('/books/user/{id}', [UserBooksController::class, 'get_books']);
+
 });

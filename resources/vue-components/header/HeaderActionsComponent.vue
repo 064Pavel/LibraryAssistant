@@ -4,7 +4,17 @@
         <div><router-link :to="{name: 'auth'}"><button class="btn btn-success ms-4">Sign In</button></router-link></div>
     </div>
 
-    <div v-if="token">
+    <div v-if="token" class="d-flex">
+
+        <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Menu
+            </button>
+            <ul class="dropdown-menu">
+                <router-link :to="{name: 'books.by.user', params: {id: user_id}}"><li><button class="dropdown-item" type="button">Action</button></li></router-link>
+            </ul>
+        </div>
+
         <div><button @click="signOut" class="btn btn-danger ms-4">Sign Out</button></div>
     </div>
 
@@ -12,18 +22,22 @@
 
 <script>
 import router from "../../js/router";
+import axios from "axios";
+import data from "bootstrap/js/src/dom/data";
 
 export default {
     name: "HeaderActionsComponent",
 
     data(){
         return{
-            token: null
+            token: null,
+            user_id: null
         }
     },
 
     mounted() {
         this.getToken()
+        this.getUser()
     },
 
     updated() {
@@ -46,9 +60,15 @@ export default {
                     this.getToken()
                 })
         },
+
+        getUser(){
+            axios.get('/api/user')
+                .then(response => {
+                    this.user_id = response.data.id
+                    console.log(response.data.id);
+                })
+        }
     },
-
-
 }
 </script>
 

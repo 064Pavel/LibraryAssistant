@@ -40,6 +40,12 @@ const router = createRouter({
                     component: () =>import('../vue-components/content/library/components_for_filters/BooksByTitleComponent.vue'),
                 },
                 {
+                    path: 'books/user/:id?',
+                    name: 'books.by.user',
+                    props: true,
+                    component: () =>import('../vue-components/content/library/components_for_filters/UserIsBooksComponent.vue'),
+                },
+                {
                     path: 'books/:id',
                     name: 'books.show',
                     props: true,
