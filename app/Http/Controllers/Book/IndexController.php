@@ -12,7 +12,7 @@ class IndexController extends Controller
 {
     public function index() : ResourceCollection
     {
-        $books = Book::with('author')->get();
+        $books = Book::with('author')->paginate(9);
         return BookResource::collection($books);
     }
 }

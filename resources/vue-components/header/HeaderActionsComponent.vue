@@ -11,7 +11,7 @@
                 Menu
             </button>
             <ul class="dropdown-menu">
-                <router-link :to="{name: 'books.by.user', params: {id: user_id}}"><li><button class="dropdown-item" type="button">Action</button></li></router-link>
+                <router-link :to="{name: 'books.by.user', params: {id: user_id}}"><li><button class="dropdown-item" type="button">My books</button></li></router-link>
             </ul>
         </div>
 
@@ -42,6 +42,8 @@ export default {
 
     updated() {
         this.getToken()
+        this.getUser()
+
     },
 
     methods:{
