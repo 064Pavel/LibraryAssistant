@@ -15,7 +15,8 @@
         <div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input v-model="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input v-model="email" type="email" class="form-control" id="exampleInputEmail1"
+                       aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -24,6 +25,11 @@
             <div class="mb-3 form-check">
                 <input v-model="checkMeOut" type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <div v-if="errors.length >= 1" class="mb-3">
+                <template v-for="error in errors">
+                    <span class="text-danger">{{ error }}</span><br>
+                </template>
             </div>
             <button @click="login" type="submit" class="btn btn-primary">Sign In</button>
         </div>
@@ -41,28 +47,49 @@ export default {
             email: '',
             password: '',
             checkMeOut: null,
+            errors: []
         }
     },
 
 
     methods: {
         login() {
+            this.errors.length = 0
             if (this.checkMeOut !== null) {
-                axios.get('/sanctum/csrf-cookie')
-                    .then(response => {
-                        console.log(this.email, this.password);
-                        axios.post('/login', {email: this.email, password: this.password})
-                            .then(response => {
-                                localStorage.setItem('x_xsrf_token', response.config.headers['X-XSRF-TOKEN'])
-                                router.push({name: 'books.index'})
+                if (this.email.length > 8 && this.password.length > 8) {
 
-                            })
-                            .catch(response => {
-                                console.log(response.response);
-                            })
+                    axios.get('/sanctum/csrf-cookie')
+                        .then(response => {
+                            console.log(this.email, this.password);
+                            axios.post('/login', {email: this.email, password: this.password})
+                                .then(response => {
+                                    localStorage.setItem('x_xsrf_token', response.config.headers['X-XSRF-TOKEN'])
+                                    router.push({name: 'books.index'})
 
-                    })
+                                })
+                                .catch(response => {
+                                    console.error('ERROR')
+                                    this.errors.push('An incorrectly entered email address or password.')
+
+                                })
+
+                        })
+                } else {
+                    this.validation()
+                }
+            } else this.errors.push('Confirm by clicking on the "Сheck me out" button')
+
+        },
+
+        validation() {
+            if (this.email.length < 1 || this.password.length < 1) {
+                this.errors.push('Fields should not be empty.')
             }
+            if (this.password.length < 8) {
+                this.errors.push('The password must be at least 8 characters long.')
+            }
+
+
         }
     }
 }

@@ -64,11 +64,14 @@ export default {
         },
 
         getUser(){
-            axios.get('/api/user')
-                .then(response => {
-                    this.user_id = response.data.id
-                    console.log(response.data.id);
-                })
+            if (this.token){
+                axios.get('/api/user')
+                    .then(response => {
+                        this.user_id = response.data.id
+                        console.log(response.data.id);
+                    })
+            }
+
         }
     },
 }

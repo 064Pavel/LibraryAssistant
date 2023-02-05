@@ -74,7 +74,8 @@ export default {
     display: flex;
     flex-direction: column;
     width: 800px;
-    height: 700px;
+    min-height: 700px;
+    max-height: 900px;
 }
 
 
